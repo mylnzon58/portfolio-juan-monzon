@@ -18,7 +18,6 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
-const githubSocial = profile.socials.find((social) => social.id === 'github');
 const knowsAbout = profile.sections.stack.groups.flatMap((group) => group.items);
 ---
 
@@ -45,56 +44,49 @@ const knowsAbout = profile.sections.stack.groups.flatMap((group) => group.items)
 
   <main id="contenido-principal">
     <HeroSection
+      locationLine={profile.hero.locationLine}
+      fullName={profile.hero.fullName}
       roleLine={profile.hero.roleLine}
-      firstName={profile.hero.firstName}
-      lastName={profile.hero.lastName}
       thesis={profile.hero.thesis}
       primaryCta={profile.hero.primaryCta}
       secondaryCta={profile.hero.secondaryCta}
       coverImage={profile.hero.coverImage}
       coverAlt={profile.hero.coverAlt}
+      coverCaption={profile.hero.coverCaption}
       avatarImage={profile.hero.avatarImage}
       avatarAlt={profile.hero.avatarAlt}
-      brandName={profile.header.brandName}
-      handle={githubSocial?.handle ?? ''}
-      timezoneLabel={profile.hero.timezoneLabel}
       ledger={profile.hero.ledger}
     />
 
     <ProjectsSection
-      eyebrow={profile.sections.projects.eyebrow}
       title={profile.sections.projects.title}
       subtitle={profile.sections.projects.subtitle}
       labels={{
-        problemLabel: profile.sections.projects.problemLabel,
-        resultLabel: profile.sections.projects.resultLabel,
         demoLabel: profile.sections.projects.demoLabel,
         repoLabel: profile.sections.projects.repoLabel,
         storeLabel: profile.sections.projects.storeLabel,
-        privateNoteLabel: profile.sections.projects.privateNoteLabel,
       }}
       projects={projects}
+      archiveTitle={profile.sections.projects.archiveTitle}
+      archiveItems={profile.sections.projects.archiveItems}
     />
 
     <StackSection
-      eyebrow={profile.sections.stack.eyebrow}
       title={profile.sections.stack.title}
       subtitle={profile.sections.stack.subtitle}
       groups={profile.sections.stack.groups}
     />
 
     <AboutSection
-      eyebrow={profile.sections.about.eyebrow}
       title={profile.sections.about.title}
       paragraphs={profile.sections.about.paragraphs}
       highlights={profile.sections.about.highlights}
-      locationLabel={profile.sections.about.locationLabel}
-      locationValue={profile.sections.about.locationValue}
+      availabilityLabel={profile.sections.about.availabilityLabel}
+      availabilityValue={profile.sections.about.availabilityValue}
     />
   </main>
 
   <SiteFooter
-    eyebrow={profile.sections.contact.eyebrow}
     title={profile.sections.contact.title}
     subtitle={profile.sections.contact.subtitle}
     primaryCta={profile.sections.contact.primaryCta}

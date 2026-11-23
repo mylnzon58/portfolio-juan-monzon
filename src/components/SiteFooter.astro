@@ -8,12 +8,20 @@ import {
   Globe,
   Heart,
   HeartHandshake,
+  Mail,
   Wallet,
 } from '@lucide/astro';
-import SectionHeader from './SectionHeader.astro';
 
 interface SocialLink {
-  id: 'linkedin' | 'github' | 'instagram' | 'sponsors' | 'tecito' | 'patreon' | 'mercadopago';
+  id:
+    | 'email'
+    | 'linkedin'
+    | 'github'
+    | 'instagram'
+    | 'sponsors'
+    | 'tecito'
+    | 'patreon'
+    | 'mercadopago';
   label: string;
   handle: string;
   href: string;
@@ -27,7 +35,6 @@ interface Cta {
 }
 
 interface Props {
-  eyebrow: string;
   title: string;
   subtitle: string;
   primaryCta: Cta;
@@ -42,7 +49,6 @@ interface Props {
 }
 
 const {
-  eyebrow,
   title,
   subtitle,
   primaryCta,
@@ -60,95 +66,110 @@ const primarySocials = socials.filter((item) => item.group === 'primary');
 const supportSocials = socials.filter((item) => item.group === 'support');
 ---
 
-<footer id="contacto" class="pt-16 pb-12 lg:pt-24 lg:pb-16">
-  <div class="container-editorial">
-    <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+<footer id="contacto" class="pt-14 pb-16 lg:pt-20 lg:pb-20">
+  <div class="container-atelier">
+    <div class="atelier-card atelier-card--lg reveal-on-scroll">
+      <div class="max-w-2xl space-y-5">
+        <h2 class="type-section text-fg">{title}</h2>
+        <p class="type-lead text-fg-secondary">{subtitle}</p>
+      </div>
 
-    <div class="mb-14 flex flex-wrap items-center gap-4">
-      <a
-        href={primaryCta.href}
-        target={primaryCta.external ? '_blank' : undefined}
-        rel={primaryCta.external ? 'noopener noreferrer' : undefined}
-        class="btn-primary"
-      >
-        <span>{primaryCta.label}</span>
-        <ArrowUpRight size={16} stroke-width={2} aria-hidden="true" />
-      </a>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href={primaryCta.href}
+          target={primaryCta.external ? '_blank' : undefined}
+          rel={primaryCta.external ? 'noopener noreferrer' : undefined}
+          class="btn-primary"
+        >
+          <span>{primaryCta.label}</span>
+          <ArrowUpRight size={17} stroke-width={2} aria-hidden="true" />
+        </a>
 
-      <a
-        href={secondaryCta.href}
-        target={secondaryCta.external ? '_blank' : undefined}
-        rel={secondaryCta.external ? 'noopener noreferrer' : undefined}
-        class="btn-secondary"
-      >
-        <span>{secondaryCta.label}</span>
-        <ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" />
-      </a>
+        <a
+          href={secondaryCta.href}
+          target={secondaryCta.external ? '_blank' : undefined}
+          rel={secondaryCta.external ? 'noopener noreferrer' : undefined}
+          class="btn-secondary"
+        >
+          <span>{secondaryCta.label}</span>
+          <ArrowUpRight size={17} stroke-width={1.75} aria-hidden="true" />
+        </a>
+      </div>
+
+      <div class="hairline-rule my-10 lg:my-12" aria-hidden="true" />
+
+      <nav aria-label={socialNavLabel} class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+        <div class="min-w-0 lg:col-span-6">
+          <p class="mb-4 text-xs font-semibold tracking-wide text-muted uppercase">
+            {channelsTitle}
+          </p>
+          <ul class="space-y-1">
+            {primarySocials.map((item) => {
+              const isExternal = !item.href.startsWith('mailto:');
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    class="group flex items-center justify-between gap-4 rounded-xl px-4 py-3.5 text-fg no-underline transition-colors hover:bg-surface-muted hover:text-accent"
+                  >
+                    <span class="flex min-w-0 items-center gap-3">
+                      <span class="text-muted transition-colors group-hover:text-accent" aria-hidden="true">
+                        {item.id === 'email' && <Mail size={16} stroke-width={1.8} />}
+                        {item.id === 'linkedin' && <BriefcaseBusiness size={16} stroke-width={1.8} />}
+                        {item.id === 'github' && <CodeXml size={16} stroke-width={1.8} />}
+                        {item.id === 'instagram' && <Globe size={16} stroke-width={1.8} />}
+                      </span>
+                      <span class="text-sm font-medium">{item.label}</span>
+                    </span>
+                    <span class="flex items-center gap-2 text-xs text-muted group-hover:text-accent">
+                      <span class="hidden sm:inline">{item.handle}</span>
+                      <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div class="min-w-0 lg:col-span-6">
+          <p class="mb-4 text-xs font-semibold tracking-wide text-muted uppercase">
+            {supportTitle}
+          </p>
+          <ul class="space-y-1">
+            {supportSocials.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between gap-4 rounded-xl px-4 py-3.5 text-fg no-underline transition-colors hover:bg-surface-muted hover:text-accent"
+                >
+                  <span class="flex min-w-0 items-center gap-3">
+                    <span class="text-muted transition-colors group-hover:text-accent" aria-hidden="true">
+                      {item.id === 'sponsors' && <HeartHandshake size={16} stroke-width={1.8} />}
+                      {item.id === 'patreon' && <Heart size={16} stroke-width={1.8} />}
+                      {item.id === 'tecito' && <Coffee size={16} stroke-width={1.8} />}
+                      {item.id === 'mercadopago' && <Wallet size={16} stroke-width={1.8} />}
+                    </span>
+                    <span class="text-sm font-medium">{item.label}</span>
+                  </span>
+                  <span class="flex items-center gap-2 text-xs text-muted group-hover:text-accent">
+                    <span class="hidden sm:inline">{item.handle}</span>
+                    <ArrowUpRight size={15} stroke-width={1.8} aria-hidden="true" />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
     </div>
 
-    <nav aria-label={socialNavLabel} class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-10">
-      <div class="min-w-0 lg:col-span-6">
-        <p class="type-meta mb-4 text-muted">{channelsTitle}</p>
-        <ul class="divide-y divide-border border-y border-border">
-          {primarySocials.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group flex items-center justify-between gap-4 py-4 text-fg no-underline transition-colors hover:text-accent"
-              >
-                <span class="flex min-w-0 items-center gap-3">
-                  <span class="text-muted transition-colors group-hover:text-accent" aria-hidden="true">
-                    {item.id === 'linkedin' && <BriefcaseBusiness size={16} stroke-width={1.75} />}
-                    {item.id === 'github' && <CodeXml size={16} stroke-width={1.75} />}
-                    {item.id === 'instagram' && <Globe size={16} stroke-width={1.75} />}
-                  </span>
-                  <span class="font-medium">{item.label}</span>
-                </span>
-                <span class="flex items-center gap-2 font-mono text-xs text-muted group-hover:text-accent">
-                  <span class="hidden sm:inline">{item.handle}</span>
-                  <ArrowUpRight size={15} stroke-width={1.75} aria-hidden="true" />
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="min-w-0 lg:col-span-6">
-        <p class="type-meta mb-4 text-muted">{supportTitle}</p>
-        <ul class="divide-y divide-border border-y border-border">
-          {supportSocials.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group flex items-center justify-between gap-4 py-4 text-fg no-underline transition-colors hover:text-accent"
-              >
-                <span class="flex min-w-0 items-center gap-3">
-                  <span class="text-muted transition-colors group-hover:text-accent" aria-hidden="true">
-                    {item.id === 'sponsors' && <HeartHandshake size={16} stroke-width={1.75} />}
-                    {item.id === 'tecito' && <Coffee size={16} stroke-width={1.75} />}
-                    {item.id === 'patreon' && <Heart size={16} stroke-width={1.75} />}
-                    {item.id === 'mercadopago' && <Wallet size={16} stroke-width={1.75} />}
-                  </span>
-                  <span class="font-medium">{item.label}</span>
-                </span>
-                <span class="flex items-center gap-2 font-mono text-xs text-muted group-hover:text-accent">
-                  <span class="hidden sm:inline">{item.handle}</span>
-                  <ArrowUpRight size={15} stroke-width={1.75} aria-hidden="true" />
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-
-    <div class="mt-14 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
+    <div class="mt-8 flex flex-col gap-4 px-2 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
         <span>{copyright}</span>
         <span aria-hidden="true">·</span>
         <span>{builtWith}</span>
@@ -156,12 +177,11 @@ const supportSocials = socials.filter((item) => item.group === 'support');
 
       <a
         href="#inicio"
-        class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.08em] text-muted no-underline transition-colors hover:text-accent"
+        class="inline-flex items-center gap-1.5 text-xs font-medium text-muted no-underline transition-colors hover:text-accent"
       >
         <span>{backToTopLabel}</span>
-        <ArrowUp size={14} stroke-width={1.75} aria-hidden="true" />
+        <ArrowUp size={14} stroke-width={1.9} aria-hidden="true" />
       </a>
     </div>
   </div>
 </footer>
-

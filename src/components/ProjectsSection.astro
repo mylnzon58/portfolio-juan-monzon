@@ -1,29 +1,36 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { ArrowUpRight, Lock } from '@lucide/astro';
 import ProjectCard from './ProjectCard.astro';
 import SectionHeader from './SectionHeader.astro';
 
+interface ArchiveItem {
+  title: string;
+  summary: string;
+  metric: string;
+  href?: string;
+  privateLabel?: string;
+}
+
 interface Props {
-  eyebrow: string;
   title: string;
   subtitle: string;
   labels: {
-    problemLabel: string;
-    resultLabel: string;
     demoLabel: string;
     repoLabel: string;
     storeLabel: string;
-    privateNoteLabel: string;
   };
   projects: CollectionEntry<'projects'>[];
+  archiveTitle: string;
+  archiveItems: ArchiveItem[];
 }
 
-const { eyebrow, title, subtitle, labels, projects } = Astro.props;
+const { title, subtitle, labels, projects, archiveTitle, archiveItems } = Astro.props;
 ---
 
-<section id="proyectos" class="py-20 lg:py-28">
-  <div class="container-editorial">
-    <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+<section id="proyectos" class="py-16 lg:py-24">
+  <div class="container-atelier">
+    <SectionHeader title={title} subtitle={subtitle} />
 
     <!-- Grilla asimétrica editorial: 12 -> 7/5 -> 5/7 -> 12 -->
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-12" data-spotlight-scope>
@@ -31,11 +38,63 @@ const { eyebrow, title, subtitle, labels, projects } = Astro.props;
         <ProjectCard project={project} labels={labels} />
       ))}
     </div>
+
+    <!-- Archivo compacto con el resto de productos en producción y código abierto -->
+    <div class="atelier-card atelier-card--padded reveal-on-scroll mt-10 lg:mt-14">
+      <h3 class="type-card mb-6 text-fg">{archiveTitle}</h3>
+
+      <ul class="space-y-1">
+        {archiveItems.map((item, idx) => (
+          <li>
+            {idx > 0 && <div class="hairline-rule my-1" aria-hidden="true" />}
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex flex-col gap-2 rounded-xl px-4 py-4 text-fg no-underline transition-colors hover:bg-surface-muted md:grid md:grid-cols-12 md:items-center md:gap-4"
+              >
+                <span class="font-semibold text-fg transition-colors group-hover:text-accent md:col-span-3">
+                  {item.title}
+                </span>
+                <span class="text-sm text-fg-secondary md:col-span-6">
+                  {item.summary}
+                </span>
+                <span class="flex items-center justify-between gap-3 md:col-span-3 md:justify-end">
+                  <span class="type-meta text-muted">{item.metric}</span>
+                  <ArrowUpRight
+                    size={16}
+                    stroke-width={1.9}
+                    class="shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                    aria-hidden="true"
+                  />
+                </span>
+              </a>
+            ) : (
+              <div class="flex flex-col gap-2 rounded-xl px-4 py-4 md:grid md:grid-cols-12 md:items-center md:gap-4">
+                <span class="font-semibold text-fg md:col-span-3">{item.title}</span>
+                <span class="text-sm text-fg-secondary md:col-span-6">{item.summary}</span>
+                <span class="flex items-center justify-between gap-3 md:col-span-3 md:justify-end">
+                  <span class="type-meta text-muted">{item.metric}</span>
+                  <span
+                    class="inline-flex items-center gap-1 text-xs text-muted"
+                    title={item.privateLabel}
+                  >
+                    <Lock size={14} stroke-width={1.8} aria-hidden="true" />
+                    <span class="sr-only">{item.privateLabel}</span>
+                  </span>
+                </span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
 
 <script>
-  // Actualiza las coordenadas del spotlight acromático solo en dispositivos con puntero fino
+  // Actualiza el reflejo especular sutil sobre tarjetas solo en dispositivos con puntero fino
   function initCardSpotlights() {
     if (
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
@@ -44,7 +103,7 @@ const { eyebrow, title, subtitle, labels, projects } = Astro.props;
       return;
     }
 
-    const cards = document.querySelectorAll<HTMLElement>('[data-spotlight-scope] .editorial-card');
+    const cards = document.querySelectorAll<HTMLElement>('[data-spotlight-scope] .atelier-card');
     cards.forEach((card) => {
       if (card.dataset.spotlightBound === 'true') return;
       card.dataset.spotlightBound = 'true';
@@ -63,4 +122,3 @@ const { eyebrow, title, subtitle, labels, projects } = Astro.props;
 
   document.addEventListener('astro:page-load', initCardSpotlights);
 </script>
-

@@ -1,15 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { ArrowUpRight, CodeXml, Globe, Lock, Store } from '@lucide/astro';
+import { ArrowUpRight, CircleCheck, CodeXml, Globe, Store } from '@lucide/astro';
 import ProjectMedia from './ProjectMedia.astro';
 
 interface Labels {
-  problemLabel: string;
-  resultLabel: string;
   demoLabel: string;
   repoLabel: string;
   storeLabel: string;
-  privateNoteLabel: string;
 }
 
 interface Props {
@@ -23,33 +20,27 @@ const { data } = project;
 const isFeatured = data.layoutVariant === 'featured' || data.layoutVariant === 'featured-reverse';
 const isReversed = data.layoutVariant === 'featured-reverse';
 
-const colSpanClass =
-  data.layoutVariant === 'featured' || data.layoutVariant === 'featured-reverse'
-    ? 'lg:col-span-12'
-    : data.layoutVariant === 'wide'
-      ? 'lg:col-span-7'
-      : 'lg:col-span-5';
+const colSpanClass = isFeatured
+  ? 'lg:col-span-12'
+  : data.layoutVariant === 'wide'
+    ? 'lg:col-span-7'
+    : 'lg:col-span-5';
 
 const mediaSizes = isFeatured
   ? '(max-width: 1023px) 100vw, 58vw'
   : data.layoutVariant === 'wide'
-    ? '(max-width: 1023px) 100vw, 58vw'
+    ? '(max-width: 1023px) 100vw, 56vw'
     : '(max-width: 1023px) 100vw, 42vw';
 
-const mediaAspect =
-  isFeatured || data.layoutVariant === 'wide' ? 'aspect-[16/9]' : 'aspect-[16/10]';
-
-const hasAnyLink = Boolean(data.links.demo || data.links.store || data.links.repo);
+const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/10]';
 ---
 
-<article class={`editorial-card reveal-on-scroll min-w-0 ${colSpanClass}`}>
-  <div class={isFeatured ? 'grid h-full grid-cols-1 lg:grid-cols-12' : 'flex h-full flex-col'}>
+<article class={`atelier-card reveal-on-scroll min-w-0 ${colSpanClass}`}>
+  <div class={isFeatured ? 'grid h-full grid-cols-1 lg:grid-cols-12 lg:items-center' : 'flex h-full flex-col'}>
     <div
       class={
         isFeatured
-          ? `flex min-w-0 items-center bg-[#0D0D0F] lg:col-span-7 ${
-              isReversed ? 'lg:order-2 lg:border-l lg:border-border' : 'lg:order-1 lg:border-r lg:border-border'
-            }`
+          ? `min-w-0 lg:col-span-7 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`
           : 'min-w-0'
       }
     >
@@ -57,9 +48,10 @@ const hasAnyLink = Boolean(data.links.demo || data.links.store || data.links.rep
         image={data.image}
         alt={data.imageAlt}
         sizes={mediaSizes}
+        aspectClass={mediaAspect}
+        tone={data.mediaTone}
+        position={data.mediaPosition}
         fit={data.mediaFit}
-        aspectClass={isFeatured ? 'w-full aspect-[16/9]' : mediaAspect}
-        class={isFeatured ? 'lg:border-b-0' : ''}
       />
     </div>
 
@@ -69,61 +61,56 @@ const hasAnyLink = Boolean(data.links.demo || data.links.store || data.links.rep
           ? `flex min-w-0 flex-col justify-between gap-6 p-6 sm:p-8 lg:col-span-5 lg:p-10 ${
               isReversed ? 'lg:order-1' : 'lg:order-2'
             }`
-          : 'flex min-w-0 flex-1 flex-col justify-between gap-6 p-6 sm:p-7'
+          : 'flex min-w-0 flex-1 flex-col justify-between gap-6 px-6 pt-3 pb-7 sm:px-8 sm:pb-8'
       }
     >
       <div class="space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs uppercase tracking-[0.06em]">
-          <span class="flex items-center gap-2 text-muted">
-            <span class="text-accent">{data.indexLabel}</span>
-            <span aria-hidden="true">/</span>
-            <span>{data.category}</span>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span class="type-meta text-muted">
+            {data.indexLabel} · {data.category}
           </span>
-          <span class="text-fg">{data.status}</span>
+          <span class="rounded-full bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent">
+            {data.metric}
+          </span>
         </div>
 
         <h3 class="type-card text-fg">{data.title}</h3>
 
-        <p class="text-sm leading-relaxed text-fg sm:text-[0.9375rem]">
+        <p class="text-sm leading-relaxed text-fg-secondary sm:text-[0.9375rem]">
           {data.summary}
         </p>
 
-        <dl class="space-y-3 border-t border-border pt-4 text-sm">
-          <div class="border-l border-border-strong pl-3">
-            <dt class="font-mono text-xs uppercase tracking-[0.06em] text-muted">
-              {labels.problemLabel}
-            </dt>
-            <dd class="mt-0.5 leading-relaxed text-muted">{data.problem}</dd>
-          </div>
-          <div class="border-l border-accent pl-3">
-            <dt class="font-mono text-xs uppercase tracking-[0.06em] text-accent">
-              {labels.resultLabel}
-            </dt>
-            <dd class="mt-0.5 leading-relaxed text-fg">{data.result}</dd>
-          </div>
-        </dl>
+        <p class="flex items-start gap-2.5 text-sm leading-relaxed text-fg">
+          <CircleCheck
+            size={16}
+            stroke-width={2}
+            class="mt-0.5 shrink-0 text-accent"
+            aria-hidden="true"
+          />
+          <span>{data.outcome}</span>
+        </p>
       </div>
 
-      <div class="space-y-5 pt-2">
+      <div class="space-y-5">
         <ul class="flex flex-wrap gap-2" aria-label={data.title}>
           {data.stack.map((tech) => (
-            <li class="border border-border bg-bg px-2.5 py-1 font-mono text-xs tracking-[0.02em] text-muted">
-              {tech}
-            </li>
+            <li class="tech-chip">{tech}</li>
           ))}
         </ul>
 
-        <div class="flex flex-wrap items-center gap-4 border-t border-border pt-4">
+        <div class="hairline-rule" aria-hidden="true" />
+
+        <div class="flex flex-wrap items-center gap-5">
           {data.links.demo && (
             <a
               href={data.links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.06em] text-accent no-underline transition-colors hover:text-fg"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
             >
-              <Globe size={14} stroke-width={1.75} aria-hidden="true" />
+              <Globe size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.demoLabel}</span>
-              <ArrowUpRight size={14} stroke-width={1.75} aria-hidden="true" />
+              <ArrowUpRight size={15} stroke-width={2} aria-hidden="true" />
             </a>
           )}
 
@@ -132,11 +119,11 @@ const hasAnyLink = Boolean(data.links.demo || data.links.store || data.links.rep
               href={data.links.store}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.06em] text-fg no-underline transition-colors hover:text-accent"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
             >
-              <Store size={14} stroke-width={1.75} aria-hidden="true" />
+              <Store size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.storeLabel}</span>
-              <ArrowUpRight size={14} stroke-width={1.75} aria-hidden="true" />
+              <ArrowUpRight size={15} stroke-width={1.9} aria-hidden="true" />
             </a>
           )}
 
@@ -145,19 +132,12 @@ const hasAnyLink = Boolean(data.links.demo || data.links.store || data.links.rep
               href={data.links.repo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.06em] text-fg no-underline transition-colors hover:text-accent"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
             >
-              <CodeXml size={14} stroke-width={1.75} aria-hidden="true" />
+              <CodeXml size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.repoLabel}</span>
-              <ArrowUpRight size={14} stroke-width={1.75} aria-hidden="true" />
+              <ArrowUpRight size={15} stroke-width={1.9} aria-hidden="true" />
             </a>
-          )}
-
-          {!hasAnyLink && (
-            <span class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.06em] text-muted">
-              <Lock size={14} stroke-width={1.75} aria-hidden="true" />
-              <span>{data.privateNote ?? labels.privateNoteLabel}</span>
-            </span>
           )}
         </div>
       </div>
