@@ -1,0 +1,21 @@
+{
+  "order": 6,
+  "indexLabel": "06",
+  "layoutVariant": "featured-reverse",
+  "title": "Apple T2 & TuxBar",
+  "category": "Sistemas de Bajo Nivel · Open Source",
+  "status": "-19.7 °C verificados",
+  "year": "2026",
+  "summary": "Suite de bajo nivel para MacBook Pro 16\" A2141 en Linux y macOS: Touch Bar en Rust puro, audio DSP 6 canales y control térmico Ring-0.",
+  "problem": "El hardware Apple T2 sufre estrangulamiento térmico severo, audio degradado en Linux y falta de soporte confiable para la Touch Bar.",
+  "result": "Descenso verificado de 99.0 °C a 79.3 °C y salto de 68 a 80 GFLOPs/s en macOS (98 °C a 68 °C en Ubuntu) más daemon DRM KMS en Rust.",
+  "stack": ["Rust", "C", "DRM KMS", "PipeWire LV2", "macOS / Linux Kernel"],
+  "image": "../../assets/images/project-t2.jpg",
+  "imageAlt": "Imagen técnica del ecosistema open-source de audio DSP y optimización térmica para MacBook Pro T2",
+  "mediaFit": "contain",
+  "links": {
+    "demo": "https://mylnzon58.github.io/t2-macbook-pro-16-1-thermal-performance-fix-macos/",
+    "repo": "https://github.com/mylnzon58/tuxbar"
+  }
+}
+

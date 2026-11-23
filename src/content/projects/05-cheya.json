@@ -1,0 +1,21 @@
+{
+  "order": 5,
+  "indexLabel": "05",
+  "layoutVariant": "wide",
+  "title": "CheYa AI",
+  "category": "SaaS & Android · Zero-Knowledge",
+  "status": "En producción",
+  "year": "2026",
+  "summary": "Asistente móvil y SaaS en el edge para resumir audios largos de WhatsApp en 8 segundos y agendar citas en Google Calendar.",
+  "problem": "Los mensajes de voz extensos interrumpen jornadas de trabajo y dejan compromisos dispersos sin registro en agenda.",
+  "result": "Desplegado en producción con arquitectura efímera Zero-Knowledge sobre Cloudflare Workers y D1 sin almacenar historiales.",
+  "stack": ["Android Nativo", "Cloudflare Workers", "Cloudflare D1", "Edge AI"],
+  "image": "../../assets/images/project-cheya.png",
+  "imageAlt": "Presentación visual de CheYa AI resumiendo notas de voz de WhatsApp",
+  "mediaFit": "framed",
+  "links": {
+    "demo": "https://cheya-app.pages.dev"
+  },
+  "todo": "TODO: Enlazar repositorio público o página de Google Play cuando esté habilitada."
+}
+

@@ -1,0 +1,20 @@
+{
+  "order": 4,
+  "indexLabel": "04",
+  "layoutVariant": "compact",
+  "title": "VeloTV",
+  "category": "Android TV · Open Source",
+  "status": "2.1 MB APK · MIT",
+  "year": "2026",
+  "summary": "Launcher nativo en Kotlin de 60 fps diseñado para revivir televisores Android TV de 1–2 GB de RAM sin anuncios ni telemetría.",
+  "problem": "Los launchers de fábrica saturan televisores modestos con carruseles patrocinados y consumen demasiada RAM antes de abrir una app.",
+  "result": "27.3 MB de RAM PSS en hardware real (3× menos que el launcher de fábrica), 10 idiomas e instalador guiado multiplataforma.",
+  "stack": ["Kotlin", "Android TV SDK", "RecyclerView", "Coroutines", "ZXing"],
+  "image": "../../assets/images/project-velotv.png",
+  "imageAlt": "Captura real de la pantalla principal de VeloTV corriendo en un televisor Skyworth Android TV",
+  "links": {
+    "demo": "https://mylnzon58.github.io/velotv/",
+    "repo": "https://github.com/mylnzon58/velotv"
+  }
+}
+

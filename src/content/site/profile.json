@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "lang": "es-AR",
+    "title": "Juan José Monzón — Full Stack Developer & AI Product Builder",
+    "description": "Portfolio de Juan José Monzón. Desarrollo full stack, productos con IA aplicada, AdTech de autoservicio, aplicaciones en tiempo real y software de bajo nivel.",
+    "ogImage": "/og-image.jpg",
+    "ogImageAlt": "Retrato editorial de Juan José Monzón, Full Stack Developer y creador de productos digitales",
+    "jobTitle": "Full Stack Developer & AI Product Builder",
+    "country": "Argentina",
+    "sameAs": [
+      "https://github.com/mylnzon58",
+      "https://www.linkedin.com/in/juan-m-97b85681/",
+      "https://www.instagram.com/juanjoclassic/"
+    ],
+    "todoNotes": [
+      "TODO: Configurar dominio definitivo en SITE_URL (Cloudflare Pages) cuando el portfolio pase a producción.",
+      "TODO: Agregar correo profesional directo en sections.contact (ej. hola@anuncero.press) si se desea habilitar mailto público."
+    ]
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "primaryNavLabel": "Navegación principal",
+    "socialNavLabel": "Redes sociales y canales de apoyo",
+    "backToTopLabel": "Volver arriba"
+  },
+  "header": {
+    "monogram": "JM",
+    "brandName": "Juan José Monzón",
+    "nav": [
+      { "label": "Proyectos", "href": "#proyectos" },
+      { "label": "Stack", "href": "#stack" },
+      { "label": "Perfil", "href": "#sobre-mi" },
+      { "label": "Contacto", "href": "#contacto" }
+    ],
+    "cta": {
+      "label": "GitHub",
+      "href": "https://github.com/mylnzon58",
+      "external": true
+    }
+  },
+  "hero": {
+    "roleLine": "Full Stack Developer · Productos con IA aplicada · Sistemas",
+    "firstName": "Juan José",
+    "lastName": "Monzón",
+    "thesis": "Construyo productos digitales de principio a fin: AdTech de autoservicio, apps en tiempo real, herramientas de IA y software nativo sin fricción.",
+    "primaryCta": {
+      "label": "Explorar proyectos",
+      "href": "#proyectos",
+      "external": false
+    },
+    "secondaryCta": {
+      "label": "Iniciar conversación",
+      "href": "#contacto",
+      "external": false
+    },
+    "coverImage": "../../assets/images/hero-cover.jpg",
+    "coverAlt": "Fotografía de Juan José Monzón en su entorno de trabajo",
+    "avatarImage": "../../assets/images/avatar.jpg",
+    "avatarAlt": "Foto de perfil de Juan José Monzón",
+    "timezoneLabel": "ARG · UTC-3",
+    "ledger": [
+      { "label": "Base", "value": "Argentina" },
+      { "label": "Foco actual", "value": "Anuncero.press & AI Products" },
+      { "label": "Trayectoria", "value": "+9 años en producción" }
+    ]
+  },
+  "sections": {
+    "projects": {
+      "index": "01",
+      "eyebrow": "SELECCIÓN DE TRABAJO",
+      "title": "Seis productos en producción",
+      "subtitle": "Desde plataformas SaaS y operación en tiempo real hasta extensiones con adopción real y código de bajo nivel.",
+      "problemLabel": "Problema",
+      "resultLabel": "Resultado",
+      "demoLabel": "Sitio / Demo",
+      "repoLabel": "Código",
+      "storeLabel": "Tienda",
+      "privateNoteLabel": "Despliegue privado"
+    },
+    "stack": {
+      "index": "02",
+      "eyebrow": "CAPACIDADES TÉCNICAS",
+      "title": "Stack elegido por rendimiento",
+      "subtitle": "Sin capas innecesarias: arquitectura estática, edge computing, aplicaciones nativas y crecimiento medible.",
+      "groups": [
+        {
+          "id": "frontend",
+          "index": "A1",
+          "title": "Frontend & Producto",
+          "icon": "layers",
+          "summary": "Interfaces rápidas, semánticas y orientadas a conversión.",
+          "items": [
+            "TypeScript",
+            "Astro",
+            "React 19",
+            "Next.js",
+            "Tailwind CSS",
+            "Vite",
+            "SEO Técnico & Core Web Vitals"
+          ]
+        },
+        {
+          "id": "backend",
+          "index": "A2",
+          "title": "Backend, Edge & Datos",
+          "icon": "server",
+          "summary": "Infraestructura liviana de baja latencia y tiempo real.",
+          "items": [
+            "Cloudflare Workers",
+            "Cloudflare D1",
+            "Node.js",
+            "Supabase & PostgreSQL",
+            "PocketBase",
+            "MQTT",
+            "Zod"
+          ]
+        },
+        {
+          "id": "systems",
+          "index": "A3",
+          "title": "Mobile & Sistemas",
+          "icon": "cpu",
+          "summary": "Software nativo cuando la memoria y los milisegundos importan.",
+          "items": [
+            "Kotlin",
+            "Android & Android TV SDK",
+            "Rust (DRM KMS)",
+            "C & Shell",
+            "Linux & PipeWire DSP",
+            "ZXing & ADB"
+          ]
+        },
+        {
+          "id": "ai-growth",
+          "index": "A4",
+          "title": "IA Aplicada & Growth",
+          "icon": "compass",
+          "summary": "Adquisición, analítica e inteligencia integrada al flujo real.",
+          "items": [
+            "Google Gemini API",
+            "Edge AI",
+            "Google Ads (Search)",
+            "CRO & Funnels",
+            "GA4"
+          ]
+        }
+      ]
+    },
+    "about": {
+      "index": "03",
+      "eyebrow": "PERFIL",
+      "title": "Producto, código y distribución",
+      "paragraphs": [
+        "Llevo más de nueve años desarrollando software web, móvil y de sistemas en Argentina, combinando ingeniería full stack con visión de negocio y adquisición digital.",
+        "Trabajo sobre todo el ciclo de vida del producto: validar el problema, diseñar arquitectura simple de mantener, desplegar en producción y medir resultados reales.",
+        "Actualmente concentro mi energía en Anuncero.press, modernización operativa con Remises Next y herramientas abiertas que resuelven fricciones concretas en escritorio, móvil y hardware."
+      ],
+      "highlights": [
+        { "value": "+9 años", "label": "Construyendo y desplegando software\u00A0real" },
+        { "value": "+745K", "label": "Clics gestionados en campañas de Google Search\u00A0Ads" },
+        { "value": "+1.300", "label": "Descargas de Gravoz AI en Open VSX\u00A0Store" }
+      ],
+      "locationLabel": "Disponibilidad",
+      "locationValue": "Colaboraciones remotas, consultoría de producto y proyectos a medida"
+    },
+    "contact": {
+      "index": "04",
+      "eyebrow": "CONTACTO",
+      "title": "Hablemos de tu próximo producto",
+      "subtitle": "Abierto a alianzas técnicas, arquitectura frontend/full stack y productos con IA lista para producción.",
+      "primaryCta": {
+        "label": "Escribir por LinkedIn",
+        "href": "https://www.linkedin.com/in/juan-m-97b85681/",
+        "external": true
+      },
+      "secondaryCta": {
+        "label": "Explorar repositorios",
+        "href": "https://github.com/mylnzon58",
+        "external": true
+      },
+      "channelsTitle": "Redes directas",
+      "supportTitle": "Apoyar código abierto",
+      "emailTodo": "TODO: Añadir enlace mailto cuando se defina casilla profesional pública.",
+      "copyright": "© 2026 Juan José Monzón.",
+      "builtWith": "Sitio estático en Astro · Sin trackers"
+    }
+  },
+  "socials": [
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "handle": "in/juan-m-97b85681",
+      "href": "https://www.linkedin.com/in/juan-m-97b85681/",
+      "group": "primary"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "handle": "@mylnzon58",
+      "href": "https://github.com/mylnzon58",
+      "group": "primary"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "handle": "@juanjoclassic",
+      "href": "https://www.instagram.com/juanjoclassic/",
+      "group": "primary"
+    },
+    {
+      "id": "sponsors",
+      "label": "GitHub Sponsors",
+      "handle": "sponsors/mylnzon58",
+      "href": "https://github.com/sponsors/mylnzon58",
+      "group": "support"
+    },
+    {
+      "id": "tecito",
+      "label": "Tecito",
+      "handle": "tecito.app/juanjoclassic",
+      "href": "https://tecito.app/juanjoclassic",
+      "group": "support"
+    },
+    {
+      "id": "patreon",
+      "label": "Patreon",
+      "handle": "JuanjoClassic",
+      "href": "https://www.patreon.com/JuanjoClassic",
+      "group": "support"
+    },
+    {
+      "id": "mercadopago",
+      "label": "Mercado Pago AR",
+      "handle": "link/mylnzon58",
+      "href": "https://link.mercadopago.com.ar/mylnzon58",
+      "group": "support"
+    }
+  ]
+}
