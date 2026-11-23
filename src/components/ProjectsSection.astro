@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  labels: {
+    problemLabel: string;
+    resultLabel: string;
+    demoLabel: string;
+    repoLabel: string;
+    storeLabel: string;
+    privateNoteLabel: string;
+  };
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { eyebrow, title, subtitle, labels, projects } = Astro.props;
+---
+
+<section id="proyectos" class="py-20 lg:py-28">
+  <div class="container-editorial">
+    <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+
+    <!-- Grilla asimétrica editorial: 12 -> 7/5 -> 5/7 -> 12 -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12" data-spotlight-scope>
+      {projects.map((project) => (
+        <ProjectCard project={project} labels={labels} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Actualiza las coordenadas del spotlight acromático solo en dispositivos con puntero fino
+  function initCardSpotlights() {
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !window.matchMedia('(hover: hover)').matches
+    ) {
+      return;
+    }
+
+    const cards = document.querySelectorAll<HTMLElement>('[data-spotlight-scope] .editorial-card');
+    cards.forEach((card) => {
+      if (card.dataset.spotlightBound === 'true') return;
+      card.dataset.spotlightBound = 'true';
+
+      card.addEventListener(
+        'pointermove',
+        (event) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+          card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+        },
+        { passive: true },
+      );
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCardSpotlights);
+</script>
+

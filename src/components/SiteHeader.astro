@@ -1,0 +1,67 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  monogram: string;
+  brandName: string;
+  nav: NavItem[];
+  cta: {
+    label: string;
+    href: string;
+    external?: boolean;
+  };
+  primaryNavLabel: string;
+}
+
+const { monogram, brandName, nav, cta, primaryNavLabel } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-bg">
+  <div class="container-editorial flex h-16 items-center justify-between gap-4">
+    <a
+      href="#inicio"
+      class="inline-flex items-center gap-3 text-fg no-underline transition-colors hover:text-accent"
+    >
+      <span
+        aria-hidden="true"
+        class="inline-flex h-8 w-8 items-center justify-center border border-accent font-mono text-xs font-medium text-accent"
+      >
+        {monogram}
+      </span>
+      <span class="hidden font-mono text-xs uppercase tracking-[0.12em] text-fg sm:inline">
+        {brandName}
+      </span>
+    </a>
+
+    <nav aria-label={primaryNavLabel} class="flex items-center gap-5 sm:gap-7">
+      <ul class="flex items-center gap-4 sm:gap-7">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="font-mono text-xs uppercase tracking-[0.08em] text-muted no-underline transition-colors hover:text-fg"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={cta.href}
+        target={cta.external ? '_blank' : undefined}
+        rel={cta.external ? 'noopener noreferrer' : undefined}
+        class="hidden items-center gap-1.5 border border-border-strong px-3 py-1.5 font-mono text-xs uppercase tracking-[0.08em] text-fg no-underline transition-colors hover:border-accent hover:text-accent md:inline-flex"
+      >
+        <span>{cta.label}</span>
+        <ArrowUpRight size={14} stroke-width={1.75} aria-hidden="true" />
+      </a>
+    </nav>
+  </div>
+</header>
+

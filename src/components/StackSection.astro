@@ -1,0 +1,59 @@
+---
+import { Compass, Cpu, Layers, Server } from '@lucide/astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface StackGroup {
+  id: string;
+  index: string;
+  title: string;
+  icon: 'layers' | 'server' | 'cpu' | 'compass';
+  summary: string;
+  items: string[];
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  groups: StackGroup[];
+}
+
+const { eyebrow, title, subtitle, groups } = Astro.props;
+---
+
+<section id="stack" class="py-20 lg:py-28">
+  <div class="container-editorial">
+    <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+
+    <!-- Matriz compacta de capacidades sin barras de porcentaje -->
+    <div class="grid grid-cols-1 border-t border-l border-border md:grid-cols-2">
+      {groups.map((group) => (
+        <article class="reveal-on-scroll min-w-0 border-r border-b border-border bg-surface p-6 sm:p-8 lg:p-10">
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <span class="font-mono text-xs uppercase tracking-[0.12em] text-accent">
+              {group.index}
+            </span>
+            <span class="text-muted" aria-hidden="true">
+              {group.icon === 'layers' && <Layers size={18} stroke-width={1.5} />}
+              {group.icon === 'server' && <Server size={18} stroke-width={1.5} />}
+              {group.icon === 'cpu' && <Cpu size={18} stroke-width={1.5} />}
+              {group.icon === 'compass' && <Compass size={18} stroke-width={1.5} />}
+            </span>
+          </div>
+
+          <h3 class="type-card mb-2 text-fg">{group.title}</h3>
+          <p class="mb-6 text-sm leading-relaxed text-muted">{group.summary}</p>
+
+          <ul class="flex flex-wrap gap-2 border-t border-border pt-5">
+            {group.items.map((item) => (
+              <li class="border border-border bg-bg px-2.5 py-1 font-mono text-xs text-fg">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+

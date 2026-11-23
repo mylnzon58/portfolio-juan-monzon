@@ -1,0 +1,214 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import { ArrowDownRight, ArrowUpRight } from '@lucide/astro';
+
+interface LedgerEntry {
+  label: string;
+  value: string;
+}
+
+interface Cta {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  roleLine: string;
+  firstName: string;
+  lastName: string;
+  thesis: string;
+  primaryCta: Cta;
+  secondaryCta: Cta;
+  coverImage: ImageMetadata;
+  coverAlt: string;
+  avatarImage: ImageMetadata;
+  avatarAlt: string;
+  brandName: string;
+  handle: string;
+  timezoneLabel: string;
+  ledger: LedgerEntry[];
+}
+
+const {
+  roleLine,
+  firstName,
+  lastName,
+  thesis,
+  primaryCta,
+  secondaryCta,
+  coverImage,
+  coverAlt,
+  avatarImage,
+  avatarAlt,
+  brandName,
+  handle,
+  timezoneLabel,
+  ledger,
+} = Astro.props;
+---
+
+<section id="inicio" class="border-b border-border pt-10 pb-14 lg:pt-16 lg:pb-20">
+  <div class="container-editorial">
+    <!-- Composición asimétrica superior: masthead editorial (8 cols) + retrato y ficha (4 cols) -->
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-10">
+      <div class="flex min-w-0 flex-col justify-between gap-8 lg:col-span-8">
+        <div class="space-y-6">
+          <h1 data-hero-reveal class="type-display text-fg">
+            <span class="block">{firstName}</span>
+            <span class="block text-fg">
+              {lastName}<span aria-hidden="true" class="text-accent">.</span>
+            </span>
+          </h1>
+
+          <div data-hero-reveal class="space-y-2 border-l-2 border-accent pl-5">
+            <p class="text-base font-medium text-fg sm:text-lg">
+              {roleLine}
+            </p>
+            <p class="type-lead max-w-[52ch] text-muted">
+              {thesis}
+            </p>
+          </div>
+        </div>
+
+        <div data-hero-reveal class="flex flex-wrap items-center gap-4">
+          <a href={primaryCta.href} class="btn-primary">
+            <span>{primaryCta.label}</span>
+            <ArrowDownRight size={16} stroke-width={2} aria-hidden="true" />
+          </a>
+          <a
+            href={secondaryCta.href}
+            target={secondaryCta.external ? '_blank' : undefined}
+            rel={secondaryCta.external ? 'noopener noreferrer' : undefined}
+            class="btn-secondary"
+          >
+            <span>{secondaryCta.label}</span>
+            <ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: retrato cuadrado en resolución nativa + ficha de perfil -->
+      <aside data-hero-reveal class="min-w-0 lg:col-span-4" aria-label={brandName}>
+        <div class="border border-border bg-surface">
+          <div class="flex items-center gap-4 border-b border-border p-4">
+            <div class="h-20 w-20 shrink-0 overflow-hidden border border-border-strong bg-bg">
+              <Picture
+                src={avatarImage}
+                alt={avatarAlt}
+                formats={['avif', 'webp']}
+                fallbackFormat="webp"
+                widths={[160, 320]}
+                sizes="80px"
+                loading="eager"
+                decoding="sync"
+                fetchpriority="high"
+                pictureAttributes={{ class: 'block h-full w-full' }}
+                class="h-full w-full object-cover"
+              />
+            </div>
+
+            <div class="min-w-0 space-y-1">
+              <p class="truncate text-base font-medium text-fg">{brandName}</p>
+              <p class="truncate font-mono text-xs text-muted">{handle}</p>
+              <p class="font-mono text-xs uppercase tracking-[0.08em] text-accent">
+                {timezoneLabel}
+              </p>
+            </div>
+          </div>
+
+          <dl class="divide-y divide-border px-4">
+            {ledger.map((entry) => (
+              <div class="flex items-baseline justify-between gap-4 py-3">
+                <dt class="type-meta shrink-0 text-muted">{entry.label}</dt>
+                <dd class="text-right text-sm font-medium text-fg">{entry.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Banda panorámica 4:1 respetando el encuadre nativo de la fotografía de portada -->
+    <figure
+      data-hero-reveal
+      class="mt-10 overflow-hidden border border-border bg-surface lg:mt-12"
+    >
+      <div class="relative aspect-[16/6] overflow-hidden bg-bg sm:aspect-[4/1]">
+        <div data-hero-media class="absolute inset-0 will-change-transform">
+          <Picture
+            src={coverImage}
+            alt={coverAlt}
+            formats={['avif', 'webp']}
+            fallbackFormat="webp"
+            widths={[640, 1024]}
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            pictureAttributes={{ class: 'block h-full w-full' }}
+            class="h-full w-full object-cover object-center contrast-[1.03]"
+          />
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let heroCtx: gsap.Context | null = null;
+
+  // GSAP y ScrollTrigger actúan exclusivamente en el hero manteniendo opacity en 1 para proteger LCP
+  function initHeroMotion() {
+    heroCtx?.revert();
+    heroCtx = null;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const hero = document.getElementById('inicio');
+    if (!hero) return;
+
+    heroCtx = gsap.context(() => {
+      gsap.from('[data-hero-reveal]', {
+        y: 12,
+        duration: 0.6,
+        stagger: 0.06,
+        ease: 'power3.out',
+        clearProps: 'transform',
+      });
+
+      const media = hero.querySelector('[data-hero-media]');
+      if (media) {
+        gsap.fromTo(
+          media,
+          { scale: 1.07, yPercent: -3.5 },
+          {
+            scale: 1.07,
+            yPercent: 3.5,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: hero,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.4,
+            },
+          },
+        );
+      }
+    }, hero);
+  }
+
+  document.addEventListener('astro:page-load', initHeroMotion);
+  document.addEventListener('astro:before-swap', () => {
+    heroCtx?.revert();
+    heroCtx = null;
+  });
+</script>

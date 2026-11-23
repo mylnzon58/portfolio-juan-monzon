@@ -1,0 +1,112 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import displayFontUrl from '@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url';
+import sansFontUrl from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import monoFontUrl from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+import '@/styles/global.css';
+import { buildPageSeo, buildPersonJsonLd } from '@/lib/seo';
+import { withBase } from '@/lib/urls';
+
+interface Props {
+  lang: string;
+  title: string;
+  description: string;
+  ogImage: string;
+  ogImageAlt: string;
+  personName: string;
+  jobTitle: string;
+  country: string;
+  sameAs: string[];
+  knowsAbout: string[];
+  skipToContentLabel: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  ogImage,
+  ogImageAlt,
+  personName,
+  jobTitle,
+  country,
+  sameAs,
+  knowsAbout,
+  skipToContentLabel,
+} = Astro.props;
+
+const seo = buildPageSeo({
+  title,
+  description,
+  ogImagePath: ogImage,
+  ogImageAlt,
+  pathname: Astro.url.pathname,
+  site: Astro.site,
+});
+
+const personJsonLd = buildPersonJsonLd({
+  name: personName,
+  jobTitle,
+  country,
+  description,
+  url: seo.canonicalUrl,
+  imageUrl: seo.ogImageUrl,
+  sameAs,
+  knowsAbout,
+});
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A0A0B" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <link rel="canonical" href={seo.canonicalUrl} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+
+    <!-- Preload de las fuentes autoalojadas principales para evitar saltos de layout -->
+    <link rel="preload" href={displayFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={monoFontUrl} as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph y Twitter Card -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={seo.canonicalUrl} />
+    <meta property="og:image" content={seo.ogImageUrl} />
+    <meta property="og:image:alt" content={seo.ogImageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.ogImageUrl} />
+    <meta name="twitter:image:alt" content={seo.ogImageAlt} />
+
+    <!-- Datos estructurados Schema.org Person -->
+    <script type="application/ld+json" set:html={personJsonLd} />
+
+    <!-- View Transitions API nativa de Astro -->
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido-principal">{skipToContentLabel}</a>
+    <slot />
+  </body>
+</html>

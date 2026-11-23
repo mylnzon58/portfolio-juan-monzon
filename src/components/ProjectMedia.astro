@@ -1,0 +1,67 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image, Picture } from 'astro:assets';
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  sizes: string;
+  aspectClass?: string;
+  fit?: 'cover' | 'contain' | 'framed';
+  eager?: boolean;
+  class?: string;
+}
+
+const {
+  image,
+  alt,
+  sizes,
+  aspectClass = 'aspect-[16/10]',
+  fit = 'cover',
+  eager = false,
+  class: extraClass = '',
+} = Astro.props;
+
+const isVector = image.format === 'svg';
+const loadingMode = eager ? 'eager' : 'lazy';
+const fetchPriority = eager ? 'high' : 'auto';
+
+const mediaFitClass =
+  fit === 'contain'
+    ? 'h-full w-full object-contain'
+    : fit === 'framed'
+      ? 'h-full w-full object-contain brightness-[0.95]'
+      : 'h-full w-full object-cover';
+
+const insetClass = fit === 'framed' ? 'inset-3 sm:inset-4' : 'inset-0';
+---
+
+<div
+  class={`relative block overflow-hidden border-b border-border bg-[#0D0D0F] ${aspectClass} ${extraClass}`}
+>
+  <div class={`absolute ${insetClass}`}>
+    {isVector ? (
+      <Image
+        src={image}
+        alt={alt}
+        loading={loadingMode}
+        decoding="async"
+        class={`editorial-card__media ${mediaFitClass}`}
+      />
+    ) : (
+      <Picture
+        src={image}
+        alt={alt}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        widths={[480, 768, 1200]}
+        sizes={sizes}
+        loading={loadingMode}
+        decoding="async"
+        fetchpriority={fetchPriority}
+        pictureAttributes={{ class: 'block h-full w-full' }}
+        class={`editorial-card__media ${mediaFitClass}`}
+      />
+    )}
+  </div>
+</div>

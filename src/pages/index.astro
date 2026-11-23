@@ -1,0 +1,110 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import AboutSection from '@/components/AboutSection.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import ProjectsSection from '@/components/ProjectsSection.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import StackSection from '@/components/StackSection.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const profileEntry = await getEntry('site', 'profile');
+if (!profileEntry) {
+  throw new Error('No se encontró src/content/site/profile.json');
+}
+
+const profile = profileEntry.data;
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const githubSocial = profile.socials.find((social) => social.id === 'github');
+const knowsAbout = profile.sections.stack.groups.flatMap((group) => group.items);
+---
+
+<BaseLayout
+  lang={profile.meta.lang}
+  title={profile.meta.title}
+  description={profile.meta.description}
+  ogImage={profile.meta.ogImage}
+  ogImageAlt={profile.meta.ogImageAlt}
+  personName={profile.header.brandName}
+  jobTitle={profile.meta.jobTitle}
+  country={profile.meta.country}
+  sameAs={profile.meta.sameAs}
+  knowsAbout={knowsAbout}
+  skipToContentLabel={profile.a11y.skipToContent}
+>
+  <SiteHeader
+    monogram={profile.header.monogram}
+    brandName={profile.header.brandName}
+    nav={profile.header.nav}
+    cta={profile.header.cta}
+    primaryNavLabel={profile.a11y.primaryNavLabel}
+  />
+
+  <main id="contenido-principal">
+    <HeroSection
+      roleLine={profile.hero.roleLine}
+      firstName={profile.hero.firstName}
+      lastName={profile.hero.lastName}
+      thesis={profile.hero.thesis}
+      primaryCta={profile.hero.primaryCta}
+      secondaryCta={profile.hero.secondaryCta}
+      coverImage={profile.hero.coverImage}
+      coverAlt={profile.hero.coverAlt}
+      avatarImage={profile.hero.avatarImage}
+      avatarAlt={profile.hero.avatarAlt}
+      brandName={profile.header.brandName}
+      handle={githubSocial?.handle ?? ''}
+      timezoneLabel={profile.hero.timezoneLabel}
+      ledger={profile.hero.ledger}
+    />
+
+    <ProjectsSection
+      eyebrow={profile.sections.projects.eyebrow}
+      title={profile.sections.projects.title}
+      subtitle={profile.sections.projects.subtitle}
+      labels={{
+        problemLabel: profile.sections.projects.problemLabel,
+        resultLabel: profile.sections.projects.resultLabel,
+        demoLabel: profile.sections.projects.demoLabel,
+        repoLabel: profile.sections.projects.repoLabel,
+        storeLabel: profile.sections.projects.storeLabel,
+        privateNoteLabel: profile.sections.projects.privateNoteLabel,
+      }}
+      projects={projects}
+    />
+
+    <StackSection
+      eyebrow={profile.sections.stack.eyebrow}
+      title={profile.sections.stack.title}
+      subtitle={profile.sections.stack.subtitle}
+      groups={profile.sections.stack.groups}
+    />
+
+    <AboutSection
+      eyebrow={profile.sections.about.eyebrow}
+      title={profile.sections.about.title}
+      paragraphs={profile.sections.about.paragraphs}
+      highlights={profile.sections.about.highlights}
+      locationLabel={profile.sections.about.locationLabel}
+      locationValue={profile.sections.about.locationValue}
+    />
+  </main>
+
+  <SiteFooter
+    eyebrow={profile.sections.contact.eyebrow}
+    title={profile.sections.contact.title}
+    subtitle={profile.sections.contact.subtitle}
+    primaryCta={profile.sections.contact.primaryCta}
+    secondaryCta={profile.sections.contact.secondaryCta}
+    channelsTitle={profile.sections.contact.channelsTitle}
+    supportTitle={profile.sections.contact.supportTitle}
+    copyright={profile.sections.contact.copyright}
+    builtWith={profile.sections.contact.builtWith}
+    socialNavLabel={profile.a11y.socialNavLabel}
+    backToTopLabel={profile.a11y.backToTopLabel}
+    socials={profile.socials}
+  />
+</BaseLayout>
