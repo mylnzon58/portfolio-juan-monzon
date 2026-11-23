@@ -1,0 +1,22 @@
+{
+  "order": 1,
+  "indexLabel": "01",
+  "layoutVariant": "featured",
+  "title": "Gravoz AI",
+  "category": "DevTools · IA Aplicada",
+  "metric": "+1.300 descargas",
+  "summary": "Asistente de voz nativo para Google Antigravity IDE con 8 voces de estudio de Google Gemini en tres niveles de profundidad.",
+  "outcome": "Superó las 1.300 descargas en Open VSX Store narrando planes y código sin cortar el ritmo de trabajo.",
+  "stack": ["TypeScript", "VS Code API", "Google Gemini TTS", "Node.js"],
+  "image": "../../assets/images/project-gravoz.jpg",
+  "imageAlt": "Interfaz real de la extensión Gravoz AI reproduciendo resúmenes hablados en Google Antigravity IDE",
+  "mediaTone": "dark",
+  "mediaPosition": "center",
+  "mediaFit": "contain",
+  "mediaAspect": "16/9",
+  "links": {
+    "demo": "https://mylnzon58.github.io/gravoz/",
+    "store": "https://open-vsx.org/extension/mylnzon58/gravoz",
+    "repo": "https://github.com/mylnzon58/gravoz"
+  }
+}

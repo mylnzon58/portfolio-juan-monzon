@@ -1,26 +1,22 @@
 {
   "meta": {
     "lang": "es-AR",
-    "title": "Juan José Monzón — Full Stack Developer & AI Product Builder",
-    "description": "Portfolio de Juan José Monzón. Desarrollo full stack, productos con IA aplicada, AdTech de autoservicio, aplicaciones en tiempo real y software de bajo nivel.",
+    "title": "Juan José Monzón — AI Product Engineer & Full Stack Developer",
+    "description": "Portfolio de Juan José Monzón. Ingeniería de producto de punta a punta: plataformas SaaS, IA aplicada, Android TV, analítica CRO y software de bajo nivel.",
     "ogImage": "/og-image.jpg",
-    "ogImageAlt": "Retrato editorial de Juan José Monzón, Full Stack Developer y creador de productos digitales",
-    "jobTitle": "Full Stack Developer & AI Product Builder",
+    "ogImageAlt": "Juan José Monzón — AI Product Engineer y Full Stack Developer en Argentina",
+    "jobTitle": "AI Product Engineer & Full Stack Developer",
     "country": "Argentina",
     "sameAs": [
       "https://github.com/mylnzon58",
       "https://www.linkedin.com/in/juan-m-97b85681/",
       "https://www.instagram.com/juanjoclassic/"
-    ],
-    "todoNotes": [
-      "TODO: Configurar dominio definitivo en SITE_URL (Cloudflare Pages) cuando el portfolio pase a producción.",
-      "TODO: Agregar correo profesional directo en sections.contact (ej. hola@anuncero.press) si se desea habilitar mailto público."
     ]
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal",
     "primaryNavLabel": "Navegación principal",
-    "socialNavLabel": "Redes sociales y canales de apoyo",
+    "socialNavLabel": "Canales de contacto y comunidad",
     "backToTopLabel": "Volver arriba"
   },
   "header": {
@@ -29,163 +25,193 @@
     "nav": [
       { "label": "Proyectos", "href": "#proyectos" },
       { "label": "Stack", "href": "#stack" },
-      { "label": "Perfil", "href": "#sobre-mi" },
+      { "label": "Sobre mí", "href": "#sobre-mi" },
       { "label": "Contacto", "href": "#contacto" }
     ],
     "cta": {
-      "label": "GitHub",
-      "href": "https://github.com/mylnzon58",
-      "external": true
+      "label": "Escribirme",
+      "href": "#contacto",
+      "external": false
     }
   },
   "hero": {
-    "roleLine": "Full Stack Developer · Productos con IA aplicada · Sistemas",
-    "firstName": "Juan José",
-    "lastName": "Monzón",
-    "thesis": "Construyo productos digitales de principio a fin: AdTech de autoservicio, apps en tiempo real, herramientas de IA y software nativo sin fricción.",
+    "locationLine": "Entre Ríos, Argentina · Trabajo remoto",
+    "fullName": "Juan José Monzón",
+    "roleLine": "AI Product Engineer & Full Stack Developer",
+    "thesis": "Diseño, construyo y escalo productos digitales de punta a punta — uniendo ingeniería full stack, IA aplicada y diseño orientado a conversión.",
     "primaryCta": {
       "label": "Explorar proyectos",
       "href": "#proyectos",
       "external": false
     },
     "secondaryCta": {
-      "label": "Iniciar conversación",
+      "label": "Conversemos",
       "href": "#contacto",
       "external": false
     },
     "coverImage": "../../assets/images/hero-cover.jpg",
-    "coverAlt": "Fotografía de Juan José Monzón en su entorno de trabajo",
+    "coverAlt": "Juan José Monzón trabajando en su MacBook Pro junto a su hijo frente al río en Argentina",
+    "coverCaption": "Ingeniería con oficio · Bases sólidas potenciadas con IA",
     "avatarImage": "../../assets/images/avatar.jpg",
-    "avatarAlt": "Foto de perfil de Juan José Monzón",
-    "timezoneLabel": "ARG · UTC-3",
+    "avatarAlt": "Retrato de Juan José Monzón",
     "ledger": [
-      { "label": "Base", "value": "Argentina" },
-      { "label": "Foco actual", "value": "Anuncero.press & AI Products" },
-      { "label": "Trayectoria", "value": "+9 años en producción" }
+      { "value": "+9 años", "label": "Construyendo productos en producción" },
+      { "value": "+745K", "label": "Clics gestionados en Google Search" },
+      { "value": "+1.300", "label": "Descargas de Gravoz AI en Open VSX" }
     ]
   },
   "sections": {
     "projects": {
-      "index": "01",
-      "eyebrow": "SELECCIÓN DE TRABAJO",
-      "title": "Seis productos en producción",
-      "subtitle": "Desde plataformas SaaS y operación en tiempo real hasta extensiones con adopción real y código de bajo nivel.",
-      "problemLabel": "Problema",
-      "resultLabel": "Resultado",
-      "demoLabel": "Sitio / Demo",
+      "title": "Productos en producción",
+      "subtitle": "Seis proyectos emblemáticos entre IA aplicada, SaaS multi-tenant, Android TV y sistemas de bajo nivel.",
+      "demoLabel": "Ver sitio",
       "repoLabel": "Código",
       "storeLabel": "Tienda",
-      "privateNoteLabel": "Despliegue privado"
+      "archiveTitle": "También en producción y código abierto",
+      "archiveItems": [
+        {
+          "title": "Anuncero.press",
+          "summary": "AdTech B2B de autoservicio para que medios vendan y publiquen anuncios sin fricción.",
+          "metric": "0% comisión · Live",
+          "href": "https://www.anuncero.press/"
+        },
+        {
+          "title": "PuntoGeo",
+          "summary": "SaaS de localización GPS vía SMS con consentimiento bilateral y licencia llave en mano.",
+          "metric": "+17K conversiones",
+          "href": "https://www.puntogeo.com/"
+        },
+        {
+          "title": "Remises Next",
+          "summary": "Despacho realtime MQTT y seguimiento de flota en VPS propio (100 móviles activos).",
+          "metric": "Venta USD 9.000+",
+          "privateLabel": "Comercial privado"
+        },
+        {
+          "title": "Lector TTS Chrome",
+          "summary": "Extensión de texto a voz para artículos y documentación en Chrome Web Store.",
+          "metric": "~982 usuarios/sem.",
+          "href": "https://chromewebstore.google.com/detail/ofiokicamkblihcegnjnjngfooehhgfk"
+        },
+        {
+          "title": "TikTok LIVE Games",
+          "summary": "Hub de batallas y juegos interactivos de ultra baja latencia para OBS y streamers.",
+          "metric": "Open Source",
+          "href": "https://mylnzon58.github.io/tiktok-live-games/"
+        },
+        {
+          "title": "Infor-Villaguay",
+          "summary": "Portal de noticias propio con más de diez años en producción, seguridad y SEO técnico.",
+          "metric": "Pos. 1.3 · CTR 38%",
+          "href": "https://infor-villaguay.com/"
+        }
+      ]
     },
     "stack": {
-      "index": "02",
-      "eyebrow": "CAPACIDADES TÉCNICAS",
-      "title": "Stack elegido por rendimiento",
-      "subtitle": "Sin capas innecesarias: arquitectura estática, edge computing, aplicaciones nativas y crecimiento medible.",
+      "title": "Criterio antes que moda",
+      "subtitle": "Elijo cada pieza según latencia, mantenimiento, costo de infraestructura y experiencia real.",
       "groups": [
         {
           "id": "frontend",
-          "index": "A1",
-          "title": "Frontend & Producto",
+          "title": "Producto & Frontend",
           "icon": "layers",
-          "summary": "Interfaces rápidas, semánticas y orientadas a conversión.",
+          "summary": "Interfaces limpias, rápidas y pensadas para reducir fricción.",
           "items": [
             "TypeScript",
             "Astro",
-            "React 19",
             "Next.js",
+            "React",
             "Tailwind CSS",
-            "Vite",
-            "SEO Técnico & Core Web Vitals"
+            "Expo",
+            "UX & CRO"
           ]
         },
         {
           "id": "backend",
-          "index": "A2",
-          "title": "Backend, Edge & Datos",
+          "title": "Edge, Backend & Datos",
           "icon": "server",
-          "summary": "Infraestructura liviana de baja latencia y tiempo real.",
+          "summary": "Arquitectura multi-tenant, tiempo real y despliegue sin sobrecosto.",
           "items": [
             "Cloudflare Workers",
             "Cloudflare D1",
+            "Supabase & RLS",
+            "PostgreSQL",
             "Node.js",
-            "Supabase & PostgreSQL",
             "PocketBase",
-            "MQTT",
-            "Zod"
+            "MQTT · Docker"
           ]
         },
         {
           "id": "systems",
-          "index": "A3",
-          "title": "Mobile & Sistemas",
+          "title": "Mobile & Bajo Nivel",
           "icon": "cpu",
-          "summary": "Software nativo cuando la memoria y los milisegundos importan.",
+          "summary": "Código nativo donde cada megabyte y milisegundo cuentan.",
           "items": [
             "Kotlin",
-            "Android & Android TV SDK",
+            "Android TV SDK",
             "Rust (DRM KMS)",
-            "C & Shell",
-            "Linux & PipeWire DSP",
-            "ZXing & ADB"
+            "C & Objective-C++",
+            "PipeWire DSP",
+            "Linux & macOS"
           ]
         },
         {
           "id": "ai-growth",
-          "index": "A4",
           "title": "IA Aplicada & Growth",
           "icon": "compass",
-          "summary": "Adquisición, analítica e inteligencia integrada al flujo real.",
+          "summary": "Flujos con agentes, adquisición rentable y medición rigurosa.",
           "items": [
             "Google Gemini API",
-            "Edge AI",
-            "Google Ads (Search)",
-            "CRO & Funnels",
-            "GA4"
+            "Prompt & Agents",
+            "Google Ads Search",
+            "SEO Técnico",
+            "GA4 · Hotjar · Clarity"
           ]
         }
       ]
     },
     "about": {
-      "index": "03",
-      "eyebrow": "PERFIL",
-      "title": "Producto, código y distribución",
+      "title": "Ingeniería, producto y oficio",
       "paragraphs": [
-        "Llevo más de nueve años desarrollando software web, móvil y de sistemas en Argentina, combinando ingeniería full stack con visión de negocio y adquisición digital.",
-        "Trabajo sobre todo el ciclo de vida del producto: validar el problema, diseñar arquitectura simple de mantener, desplegar en producción y medir resultados reales.",
-        "Actualmente concentro mi energía en Anuncero.press, modernización operativa con Remises Next y herramientas abiertas que resuelven fricciones concretas en escritorio, móvil y hardware."
+        "Soy AI Product Engineer y Full Stack Developer en Argentina, con más de nueve años llevando productos digitales desde la primera idea hasta producción y ventas reales.",
+        "Uno bases sólidas de desarrollo con IA aplicada, psicología de producto (PX) y analítica de conversión para construir software simple, medible y duradero.",
+        "Orgulloso padre de una niña y un niño pequeño; disfruto resolver fricciones concretas con tecnología elegante, tanto en plataformas SaaS como en hardware de bajo nivel."
       ],
       "highlights": [
-        { "value": "+9 años", "label": "Construyendo y desplegando software\u00A0real" },
-        { "value": "+745K", "label": "Clics gestionados en campañas de Google Search\u00A0Ads" },
-        { "value": "+1.300", "label": "Descargas de Gravoz AI en Open VSX\u00A0Store" }
+        { "value": "+10 años", "label": "Operando portales, VPS e infraestructura propia" },
+        { "value": "+17.000", "label": "Conversiones directas en campañas de Google Search" },
+        { "value": "~982", "label": "Usuarios activos semanales en Chrome Web Store" }
       ],
-      "locationLabel": "Disponibilidad",
-      "locationValue": "Colaboraciones remotas, consultoría de producto y proyectos a medida"
+      "availabilityLabel": "Disponibilidad",
+      "availabilityValue": "Roles remotos de producto, consultoría full stack e iniciativas con IA lista para producción."
     },
     "contact": {
-      "index": "04",
-      "eyebrow": "CONTACTO",
       "title": "Hablemos de tu próximo producto",
-      "subtitle": "Abierto a alianzas técnicas, arquitectura frontend/full stack y productos con IA lista para producción.",
+      "subtitle": "Abierto a colaborar en plataformas web, herramientas con IA aplicada y arquitectura enfocada en resultados.",
       "primaryCta": {
-        "label": "Escribir por LinkedIn",
+        "label": "Escribir por email",
+        "href": "mailto:mylnzon58@gmail.com",
+        "external": false
+      },
+      "secondaryCta": {
+        "label": "Conectar en LinkedIn",
         "href": "https://www.linkedin.com/in/juan-m-97b85681/",
         "external": true
       },
-      "secondaryCta": {
-        "label": "Explorar repositorios",
-        "href": "https://github.com/mylnzon58",
-        "external": true
-      },
-      "channelsTitle": "Redes directas",
+      "channelsTitle": "Contacto directo",
       "supportTitle": "Apoyar código abierto",
-      "emailTodo": "TODO: Añadir enlace mailto cuando se defina casilla profesional pública.",
       "copyright": "© 2026 Juan José Monzón.",
-      "builtWith": "Sitio estático en Astro · Sin trackers"
+      "builtWith": "Astro estático · Sin trackers"
     }
   },
   "socials": [
+    {
+      "id": "email",
+      "label": "Email",
+      "handle": "mylnzon58@gmail.com",
+      "href": "mailto:mylnzon58@gmail.com",
+      "group": "primary"
+    },
     {
       "id": "linkedin",
       "label": "LinkedIn",
@@ -215,17 +241,17 @@
       "group": "support"
     },
     {
-      "id": "tecito",
-      "label": "Tecito",
-      "handle": "tecito.app/juanjoclassic",
-      "href": "https://tecito.app/juanjoclassic",
-      "group": "support"
-    },
-    {
       "id": "patreon",
       "label": "Patreon",
       "handle": "JuanjoClassic",
       "href": "https://www.patreon.com/JuanjoClassic",
+      "group": "support"
+    },
+    {
+      "id": "tecito",
+      "label": "Tecito",
+      "handle": "tecito.app/juanjoclassic",
+      "href": "https://tecito.app/juanjoclassic",
       "group": "support"
     },
     {

@@ -1,0 +1,18 @@
+{
+  "order": 5,
+  "indexLabel": "05",
+  "layoutVariant": "wide",
+  "title": "ComercioCentral",
+  "category": "SaaS Multi-tenant · Producción",
+  "metric": "Marketplace activo",
+  "summary": "Plataforma multi-tenant en producción para comercios locales con catálogos, pedidos directos y planes de suscripción.",
+  "outcome": "Separación estricta de datos por comercio mediante PostgreSQL RLS, autenticación y arquitectura serverless.",
+  "stack": ["Next.js", "React", "Supabase RLS", "PostgreSQL"],
+  "image": "../../assets/images/project-comerciocentral.png",
+  "imageAlt": "Interfaz pública en producción del marketplace local ComercioCentral.online",
+  "mediaTone": "dark",
+  "mediaPosition": "top",
+  "links": {
+    "demo": "https://www.comerciocentral.online/"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "order": 2,
+  "indexLabel": "02",
+  "layoutVariant": "wide",
+  "title": "CheYa AI",
+  "category": "SaaS & Android · Edge AI",
+  "metric": "Resumen en 8 s",
+  "summary": "Asistente IA para WhatsApp que sintetiza notas de voz largas en 8 segundos y agenda turnos en Google Calendar en un toque.",
+  "outcome": "Desplegado en producción con arquitectura efímera Zero-Knowledge sobre Cloudflare Workers y D1.",
+  "stack": ["Android Nativo", "Cloudflare Workers", "Cloudflare D1", "Edge AI"],
+  "image": "../../assets/images/project-cheya.png",
+  "imageAlt": "Vista del producto CheYa AI resumiendo audios largos de WhatsApp y agendando en Google Calendar",
+  "mediaTone": "light",
+  "mediaPosition": "center",
+  "mediaFit": "contain",
+  "mediaAspect": "16/9",
+  "links": {
+    "demo": "https://cheya-app.pages.dev"
+  }
+}

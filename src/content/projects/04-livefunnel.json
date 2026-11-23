@@ -1,0 +1,20 @@
+{
+  "order": 4,
+  "indexLabel": "04",
+  "layoutVariant": "compact",
+  "title": "LiveFunnel",
+  "category": "Analítica CRO · Open Source",
+  "metric": "Globo 3D · Tiempo real",
+  "summary": "Motor open-source de embudos de conversión en vivo, globo 3D autónomo y trazabilidad paso a paso para Next.js y Supabase.",
+  "outcome": "Agregación SQL directa en PostgreSQL que audita cada sesión protegiendo la cuota gratuita sin APIs externas.",
+  "stack": ["Next.js", "TypeScript", "Supabase", "PostgreSQL"],
+  "image": "../../assets/images/project-livefunnel.png",
+  "imageAlt": "Tablero de analítica en tiempo real LiveFunnel mostrando trazabilidad de sesiones y embudo de conversión",
+  "mediaTone": "light",
+  "mediaPosition": "top",
+  "mediaFit": "contain",
+  "mediaAspect": "16/10",
+  "links": {
+    "repo": "https://github.com/mylnzon58/livefunnel"
+  }
+}
