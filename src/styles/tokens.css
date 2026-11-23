@@ -1,43 +1,53 @@
-/* Tokens de diseño del sistema editorial darkroom (grilla base de 8px) */
+/* Tokens del sistema Apple-editorial claro sobre porcelana cálida (grilla base de 8px) */
 :root {
-  /* Paleta cromática: un único acento (#C6FF3D) sobre superficies oscuras sólidas */
-  --bg: #0A0A0B;
-  --surface: #111113;
-  --surface-2: #18181B;
-  --fg: #EDEDED;
-  --muted: #8A8A8F;
-  --border: #1F1F23;
-  --border-strong: #2E2E34;
-  --accent: #C6FF3D;
-  --accent-ink: #0A0A0B;
+  /* Paleta clara serena: porcelana luminosa, tinta carbón y un único acento zafiro AA/AAA */
+  --bg: #F8F7F4;
+  --surface: #FFFFFF;
+  --surface-muted: #F1EFEA;
+  --surface-glass: rgba(248, 247, 244, 0.82);
+  --surface-glass-strong: rgba(255, 255, 255, 0.86);
 
-  /* Tipografía arquitectónica autoalojada (display condensada + texto técnico) */
-  --font-display: 'Barlow Condensed', 'IBM Plex Sans', system-ui, sans-serif;
-  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --fg: #161618;
+  --fg-secondary: #4E4E55;
+  --muted: #63636B;
+
+  --border: #E5E3DC;
+  --border-strong: #CFCBC1;
+
+  --accent: #0058B8;
+  --accent-hover: #004494;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #EBF3FC;
+
+  /* Elevaciones difusas suaves tipo hardware Apple */
+  --shadow-card: 0 1px 2px rgba(22, 22, 24, 0.04), 0 14px 36px -20px rgba(22, 22, 24, 0.09);
+  --shadow-card-hover: 0 4px 12px rgba(22, 22, 24, 0.05), 0 28px 60px -24px rgba(22, 22, 24, 0.14);
+  --shadow-stage: 0 2px 6px rgba(22, 22, 24, 0.05), 0 32px 72px -28px rgba(22, 22, 24, 0.15);
+
+  /* Tipografía editorial autoalojada: serif óptica con carácter + grotesca escandinava limpia */
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* Escala tipográfica fluida con clamp() */
-  --text-display: clamp(3.5rem, 8.6vw, 7.25rem);
-  --text-section: clamp(2.125rem, 4.2vw, 3.5rem);
-  --text-card: clamp(1.625rem, 2.3vw, 2.125rem);
-  --text-lead: clamp(1.0625rem, 1.35vw, 1.25rem);
+  --text-display: clamp(2.75rem, 6.2vw, 5.25rem);
+  --text-section: clamp(2rem, 4vw, 3.25rem);
+  --text-card: clamp(1.5rem, 2.2vw, 1.95rem);
+  --text-lead: clamp(1.0625rem, 1.45vw, 1.25rem);
   --text-body: clamp(0.9375rem, 1vw, 1rem);
   --text-meta: 0.75rem;
 
   /* Medida máxima de lectura y ritmo de 8px */
-  --measure: 65ch;
-  --container-max: 80rem;
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-6: 3rem;
-  --space-8: 4rem;
-  --space-12: 6rem;
-  --space-16: 8rem;
+  --measure: 62ch;
+  --container-max: 78rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 9999px;
 
-  /* Curvas y tiempos de transición */
-  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 180ms;
-  --dur-base: 320ms;
+  /* Curvas suaves inspiradas en física de resorte amortiguado */
+  --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-base: 380ms;
+  --dur-slow: 620ms;
 }

@@ -1,21 +1,24 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
-/* Registro de fuentes y tokens en Tailwind v4 */
+/* Registro de fuentes y tokens semánticos en Tailwind v4 */
 @theme {
-  --font-display: 'Barlow Condensed', 'IBM Plex Sans', system-ui, sans-serif;
-  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-surface-muted: var(--surface-muted);
   --color-fg: var(--fg);
+  --color-fg-secondary: var(--fg-secondary);
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
 }
 
 @layer base {
@@ -26,9 +29,10 @@
     font-size: 16px;
     line-height: 1.6;
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
@@ -40,14 +44,15 @@
   }
 
   ::selection {
-    background-color: var(--accent);
-    color: var(--accent-ink);
+    background-color: var(--accent-soft);
+    color: var(--accent);
   }
 
-  /* Foco visible AA consistente en todos los controles interactivos */
+  /* Foco accesible AA consistente en todos los controles interactivos */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
+    border-radius: 4px;
   }
 
   main :is(h1, h2, h3) {
@@ -68,184 +73,307 @@
   }
 }
 
-/* Clases utilitarias editoriales (BEM-lite) */
-.container-editorial {
+/* Contenedor principal con márgenes fluidos generosos */
+.container-atelier {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 3rem);
+  padding-inline: clamp(1.25rem, 4.5vw, 3.25rem);
 }
 
+/* Jerarquía tipográfica editorial clara */
 .type-display {
   font-family: var(--font-display);
   font-size: var(--text-display);
-  font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
 }
 
 .type-section {
   font-family: var(--font-display);
   font-size: var(--text-section);
-  font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
 .type-card {
   font-family: var(--font-display);
   font-size: var(--text-card);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .type-lead {
   font-size: var(--text-lead);
-  line-height: 1.5;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
 }
 
 .type-meta {
   font-family: var(--font-mono);
   font-size: var(--text-meta);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Botones arquitectónicos */
+/* Barra de navegación translúcida tipo Apple */
+.nav-glass {
+  background-color: var(--surface-glass);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+/* Indicador sutil de progreso de lectura impulsado 100% por CSS Scroll-Driven Animations */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 60;
+  background-color: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes progress-grow {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .scroll-progress {
+      animation: progress-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+/* Botones cápsula serenos de alta legibilidad */
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.375rem;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: var(--radius-pill);
   background-color: var(--accent);
   color: var(--accent-ink);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  border: 1px solid var(--accent);
-  transition: background-color var(--dur-fast) var(--ease-editorial),
-    color var(--dur-fast) var(--ease-editorial),
-    transform var(--dur-fast) var(--ease-editorial);
+  box-shadow: 0 2px 10px -2px rgba(0, 88, 184, 0.35);
+  transition:
+    background-color var(--dur-fast) var(--ease-apple),
+    transform var(--dur-fast) var(--ease-apple),
+    box-shadow var(--dur-fast) var(--ease-apple);
 }
 
 .btn-primary:hover {
-  background-color: var(--fg);
-  border-color: var(--fg);
-  color: var(--accent-ink);
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(0, 88, 184, 0.42);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.375rem;
-  background-color: transparent;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface);
   color: var(--fg);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  border: 1px solid var(--border-strong);
-  transition: border-color var(--dur-fast) var(--ease-editorial),
-    color var(--dur-fast) var(--ease-editorial),
-    background-color var(--dur-fast) var(--ease-editorial);
+  box-shadow: inset 0 0 0 1px var(--border-strong), 0 1px 2px rgba(22, 22, 24, 0.04);
+  transition:
+    color var(--dur-fast) var(--ease-apple),
+    transform var(--dur-fast) var(--ease-apple),
+    box-shadow var(--dur-fast) var(--ease-apple),
+    background-color var(--dur-fast) var(--ease-apple);
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent);
   color: var(--accent);
-  background-color: var(--surface);
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px var(--accent), 0 10px 24px -14px rgba(0, 88, 184, 0.25);
 }
 
 /* Enlace de salto accesible para navegación por teclado */
 .skip-link {
   position: fixed;
-  top: 0.75rem;
-  left: 0.75rem;
-  z-index: 60;
-  padding: 0.625rem 1rem;
-  background-color: var(--accent);
-  color: var(--accent-ink);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  top: 0.875rem;
+  left: 0.875rem;
+  z-index: 70;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--fg);
+  color: var(--surface);
+  font-size: 0.875rem;
   font-weight: 500;
-  text-transform: uppercase;
   text-decoration: none;
-  transform: translateY(-160%);
-  transition: transform var(--dur-fast) var(--ease-editorial);
+  transform: translateY(-180%);
+  transition: transform var(--dur-fast) var(--ease-apple);
 }
 
 .skip-link:focus {
   transform: translateY(0);
 }
 
-/* Tarjeta editorial con spotlight acromático sutil guiado por puntero */
-.editorial-card {
+/* Superficie cerámica elevada con halo especular sutil guiado por cursor */
+.atelier-card {
   position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
   background-color: var(--surface);
-  border: 1px solid var(--border);
-  transition: border-color var(--dur-base) var(--ease-editorial),
-    background-color var(--dur-base) var(--ease-editorial);
+  box-shadow: inset 0 0 0 1px var(--border), var(--shadow-card);
+  transition:
+    transform var(--dur-base) var(--ease-apple),
+    box-shadow var(--dur-base) var(--ease-apple);
 }
 
-.editorial-card:hover {
-  border-color: var(--border-strong);
-  background-color: var(--surface-2);
+.atelier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 1px var(--border-strong), var(--shadow-card-hover);
+}
+
+.atelier-card--padded {
+  padding: 2rem;
+}
+
+.atelier-card--lg {
+  padding: 3rem;
+}
+
+@media (max-width: 640px) {
+  .atelier-card--padded {
+    padding: 1.5rem;
+  }
+
+  .atelier-card--lg {
+    padding: 1.75rem;
+  }
+}
+
+/* Galería cerámica para capturas de producto con sombra física suave */
+.media-bezel {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(22, 22, 24, 0.06), 0 18px 36px -18px rgba(22, 22, 24, 0.18);
+  outline: 1px solid rgba(22, 22, 24, 0.06);
+}
+
+/* Escenario panorámico del hero */
+.hero-stage {
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-muted);
+  box-shadow: inset 0 0 0 1px var(--border), var(--shadow-stage);
+}
+
+/* Chip translúcido flotante sobre fotografía con contraste AA asegurado */
+.glass-caption {
+  background-color: var(--surface-glass-strong);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), 0 8px 24px -10px rgba(22, 22, 24, 0.22);
+}
+
+/* Etiquetas de tecnología suaves y respirables */
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-muted);
+  color: var(--fg-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Separador horizontal arquitectónico con margen limpio */
+.hairline-rule {
+  height: 1px;
+  width: 100%;
+  background-color: var(--border);
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .editorial-card::after {
+  .atelier-card::after {
     content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
     opacity: 0;
     background: radial-gradient(
-      420px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(237, 237, 237, 0.045),
-      transparent 65%
+      520px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(0, 88, 184, 0.055),
+      transparent 60%
     );
-    transition: opacity var(--dur-base) var(--ease-editorial);
+    transition: opacity var(--dur-base) var(--ease-apple);
   }
 
-  .editorial-card:hover::after {
+  .atelier-card:hover::after {
     opacity: 1;
   }
 
-  .editorial-card__media {
-    transition: transform 520ms var(--ease-editorial);
+  .atelier-card__media {
+    transition: transform var(--dur-slow) var(--ease-apple);
   }
 
-  .editorial-card:hover .editorial-card__media {
-    transform: scale(1.02);
+  .atelier-card:hover .atelier-card__media {
+    transform: scale(1.03);
   }
 }
 
-/* Animaciones nativas CSS scroll-driven (progresivas y sin JS) */
-@keyframes editorial-reveal {
+/* Animaciones nativas CSS scroll-driven: parallax real en capturas + revelación suave */
+@keyframes atelier-reveal {
   from {
-    opacity: 0.72;
-    transform: translateY(16px);
+    opacity: 0.45;
+    transform: translateY(24px) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes frame-parallax {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: translateY(-14px);
   }
 }
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal-on-scroll {
-      animation: editorial-reveal linear both;
+      animation: atelier-reveal linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 85%;
+      animation-range: entry 0% entry 34%;
+    }
+
+    .parallax-frame {
+      animation: frame-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
     }
   }
 }

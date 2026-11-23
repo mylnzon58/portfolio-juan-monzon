@@ -21,5 +21,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  ...(isGitHubPages ? {} : { adapter: cloudflare() }),
+  ...(isGitHubPages ? {} : { adapter: cloudflare({ imageService: 'compile' }) }),
 });
