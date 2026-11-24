@@ -58,10 +58,10 @@ const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/
     <div
       class={
         isFeatured
-          ? `flex min-w-0 flex-col justify-between gap-6 p-6 sm:p-8 lg:col-span-5 lg:p-10 ${
+          ? `flex min-w-0 flex-col justify-between gap-6 p-6 sm:p-8 lg:col-span-5 lg:p-9 ${
               isReversed ? 'lg:order-1' : 'lg:order-2'
             }`
-          : 'flex min-w-0 flex-1 flex-col justify-between gap-6 px-6 pt-3 pb-7 sm:px-8 sm:pb-8'
+          : 'flex min-w-0 flex-1 flex-col justify-between gap-6 px-6 pt-3 pb-5 sm:px-8 sm:pb-6'
       }
     >
       <div class="space-y-4">
@@ -69,7 +69,7 @@ const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/
           <span class="type-meta text-muted">
             {data.indexLabel} · {data.category}
           </span>
-          <span class="rounded-full bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent">
+          <span class="whitespace-nowrap rounded-full bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent tabular-nums">
             {data.metric}
           </span>
         </div>
@@ -100,13 +100,14 @@ const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/
 
         <div class="hairline-rule" aria-hidden="true" />
 
-        <div class="flex flex-wrap items-center gap-5">
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-1">
           {data.links.demo && (
             <a
               href={data.links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
+              title={`${labels.demoLabel} — ${data.title}`}
+              class="inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-accent no-underline transition-colors hover:text-accent-hover"
             >
               <Globe size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.demoLabel}</span>
@@ -119,7 +120,8 @@ const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/
               href={data.links.store}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
+              title={`${labels.storeLabel} — ${data.title}`}
+              class="inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
             >
               <Store size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.storeLabel}</span>
@@ -132,7 +134,8 @@ const mediaAspect = data.mediaAspect === '16/9' ? 'aspect-[16/9]' : 'aspect-[16/
               href={data.links.repo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
+              title={`${labels.repoLabel} — ${data.title}`}
+              class="inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap text-sm font-medium text-fg no-underline transition-colors hover:text-accent"
             >
               <CodeXml size={15} stroke-width={1.9} aria-hidden="true" />
               <span>{labels.repoLabel}</span>

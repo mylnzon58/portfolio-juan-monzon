@@ -66,7 +66,7 @@ const primarySocials = socials.filter((item) => item.group === 'primary');
 const supportSocials = socials.filter((item) => item.group === 'support');
 ---
 
-<footer id="contacto" class="pt-14 pb-16 lg:pt-20 lg:pb-20">
+<footer id="contacto" class="pt-14 pb-[max(4rem,calc(2rem+env(safe-area-inset-bottom,0px)))] lg:pt-20 lg:pb-[max(5rem,calc(2rem+env(safe-area-inset-bottom,0px)))]">
   <div class="container-atelier">
     <div class="atelier-card atelier-card--lg reveal-on-scroll">
       <div class="max-w-2xl space-y-5">
@@ -112,7 +112,8 @@ const supportSocials = socials.filter((item) => item.group === 'support');
                     href={item.href}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    class="group flex items-center justify-between gap-4 rounded-xl px-4 py-3.5 text-fg no-underline transition-colors hover:bg-surface-muted hover:text-accent"
+                    class="group flex min-h-[44px] items-center justify-between gap-4 rounded-xl px-4 py-3 text-fg no-underline transition-colors hover:bg-surface-muted hover:text-accent"
+                    title={item.handle}
                   >
                     <span class="flex min-w-0 items-center gap-3">
                       <span class="text-muted transition-colors group-hover:text-accent" aria-hidden="true">
@@ -177,7 +178,8 @@ const supportSocials = socials.filter((item) => item.group === 'support');
 
       <a
         href="#inicio"
-        class="inline-flex items-center gap-1.5 text-xs font-medium text-muted no-underline transition-colors hover:text-accent"
+        title={backToTopLabel}
+        class="inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap text-xs font-medium text-muted no-underline transition-colors hover:text-accent"
       >
         <span>{backToTopLabel}</span>
         <ArrowUp size={14} stroke-width={1.9} aria-hidden="true" />

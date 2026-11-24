@@ -68,9 +68,28 @@ const personJsonLd = buildPersonJsonLd({
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#F8F7F4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta id="theme-color-meta" name="theme-color" content="#F5F5F7" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      (() => {
+        const applyStoredTheme = () => {
+          let theme = 'light';
+          try {
+            if (localStorage.getItem('jm_theme') === 'dark') theme = 'dark';
+          } catch {}
+          if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+          const meta = document.getElementById('theme-color-meta');
+          if (meta) meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F5F5F7');
+        };
+        applyStoredTheme();
+        document.addEventListener('astro:after-swap', applyStoredTheme);
+      })();
+    </script>
 
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />

@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#F8F7F4"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" stroke="#E5E3DC" stroke-width="2"/>
-  <path d="M18 43V20H23.2V37.6C23.2 40.4 21.5 42.3 18.8 43H18ZM31.5 20H37.2L42.8 33.4L48.4 20H53V43H48.2V29.6L44.5 38.4H41.1L37.4 29.6V43H31.5V20Z" fill="#161618"/>
-  <circle cx="20.6" cy="48.5" r="2.6" fill="#0058B8"/>
+  <style>
+    .bg { fill: #F5F5F7; }
+    .rim { stroke: #E5E5EA; }
+    .ink { fill: #1D1D1F; }
+    .dot { fill: #0058B8; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #000000; }
+      .rim { stroke: #2C2C2E; }
+      .ink { fill: #F5F5F7; }
+      .dot { fill: #0A84FF; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="16"/>
+  <rect class="rim" x="1.5" y="1.5" width="61" height="61" rx="14.5" stroke-width="2"/>
+  <path class="ink" d="M18 43V20H23.2V37.6C23.2 40.4 21.5 42.3 18.8 43H18ZM31.5 20H37.2L42.8 33.4L48.4 20H53V43H48.2V29.6L44.5 38.4H41.1L37.4 29.6V43H31.5V20Z"/>
+  <circle class="dot" cx="20.6" cy="48.5" r="2.6"/>
 </svg>

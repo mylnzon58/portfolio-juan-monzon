@@ -1,23 +1,28 @@
-/* Tokens del sistema Apple-editorial claro sobre porcelana cálida (grilla base de 8px) */
+/* Tokens del sistema Apple-editorial dual: Claro (#F5F5F7) + OLED Puro (#000000) */
 :root {
-  /* Paleta clara serena: porcelana luminosa, tinta carbón y un único acento zafiro AA/AAA */
-  --bg: #F8F7F4;
+  --bg: #F5F5F7;
   --surface: #FFFFFF;
-  --surface-muted: #F1EFEA;
-  --surface-glass: rgba(248, 247, 244, 0.82);
-  --surface-glass-strong: rgba(255, 255, 255, 0.86);
+  --surface-muted: #EBEBF0;
+  --surface-glass: rgba(245, 245, 247, 0.82);
+  --surface-glass-strong: rgba(255, 255, 255, 0.88);
+  --glass-rim: rgba(255, 255, 255, 0.72);
+  --bezel-rim: rgba(22, 22, 24, 0.08);
+  --stage-dark: #161618;
 
-  --fg: #161618;
-  --fg-secondary: #4E4E55;
+  --fg: #1D1D1F;
+  --fg-secondary: #48484F;
   --muted: #63636B;
 
-  --border: #E5E3DC;
-  --border-strong: #CFCBC1;
+  --border: #E5E5EA;
+  --border-strong: #C7C7CC;
 
   --accent: #0058B8;
   --accent-hover: #004494;
+  --accent-solid: #0058B8;
+  --accent-solid-hover: #004494;
   --accent-ink: #FFFFFF;
   --accent-soft: #EBF3FC;
+  --spotlight-tint: rgba(0, 88, 184, 0.055);
 
   /* Elevaciones difusas suaves tipo hardware Apple */
   --shadow-card: 0 1px 2px rgba(22, 22, 24, 0.04), 0 14px 36px -20px rgba(22, 22, 24, 0.09);
@@ -50,4 +55,34 @@
   --dur-fast: 200ms;
   --dur-base: 380ms;
   --dur-slow: 620ms;
+}
+
+:root[data-theme='dark'] {
+  --bg: #000000;
+  --surface: #1C1C1E;
+  --surface-muted: #2C2C2E;
+  --surface-glass: rgba(0, 0, 0, 0.84);
+  --surface-glass-strong: rgba(28, 28, 30, 0.88);
+  --glass-rim: rgba(255, 255, 255, 0.16);
+  --bezel-rim: rgba(255, 255, 255, 0.12);
+  --stage-dark: #0D0D0F;
+
+  --fg: #F5F5F7;
+  --fg-secondary: #D1D1D6;
+  --muted: #98989D;
+
+  --border: #2C2C2E;
+  --border-strong: #48484A;
+
+  --accent: #52A7FF;
+  --accent-hover: #7DBEFF;
+  --accent-solid: #0058B8;
+  --accent-solid-hover: #006CE0;
+  --accent-ink: #FFFFFF;
+  --accent-soft: rgba(82, 167, 255, 0.16);
+  --spotlight-tint: rgba(82, 167, 255, 0.09);
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 40px -22px rgba(0, 0, 0, 0.85);
+  --shadow-card-hover: 0 1px 0 rgba(255, 255, 255, 0.08), 0 28px 64px -24px rgba(0, 0, 0, 0.92);
+  --shadow-stage: 0 2px 8px rgba(0, 0, 0, 0.65), 0 32px 72px -28px rgba(0, 0, 0, 0.9);
 }

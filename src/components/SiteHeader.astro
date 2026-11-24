@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight } from '@lucide/astro';
+import { ArrowUpRight, Moon, Sun } from '@lucide/astro';
 
 interface NavItem {
   label: string;
@@ -22,10 +22,11 @@ const { monogram, brandName, nav, cta, primaryNavLabel } = Astro.props;
 ---
 
 <header class="nav-glass sticky top-0 z-40">
-  <div class="container-atelier flex h-18 items-center justify-between gap-4">
+  <div class="container-atelier flex h-18 items-center justify-between gap-2 sm:gap-4">
     <a
       href="#inicio"
-      class="inline-flex shrink-0 items-center gap-3 text-fg no-underline transition-colors hover:text-accent"
+      class="inline-flex min-h-[44px] shrink-0 items-center gap-3 whitespace-nowrap text-fg no-underline transition-colors hover:text-accent"
+      title={brandName}
     >
       <span
         aria-hidden="true"
@@ -38,13 +39,13 @@ const { monogram, brandName, nav, cta, primaryNavLabel } = Astro.props;
       </span>
     </a>
 
-    <nav aria-label={primaryNavLabel} class="flex min-w-0 items-center gap-4 sm:gap-7">
-      <ul class="flex items-center gap-4 sm:gap-7">
+    <nav aria-label={primaryNavLabel} class="flex min-w-0 items-center gap-2 sm:gap-5">
+      <ul class="flex items-center gap-2 sm:gap-6">
         {nav.map((item) => (
           <li>
             <a
               href={item.href}
-              class="inline-block py-2 text-xs font-medium text-muted no-underline transition-colors hover:text-fg sm:text-sm"
+              class="inline-flex min-h-[44px] items-center whitespace-nowrap px-0.5 text-[11px] font-medium text-muted no-underline transition-colors hover:text-fg min-[410px]:px-1 min-[410px]:text-xs sm:text-sm"
             >
               {item.label}
             </a>
@@ -52,11 +53,30 @@ const { monogram, brandName, nav, cta, primaryNavLabel } = Astro.props;
         ))}
       </ul>
 
+      <button
+        type="button"
+        data-theme-toggle
+        class="theme-toggle shrink-0"
+        aria-pressed="false"
+        aria-label="Cambiar a modo OLED oscuro"
+        title="Cambiar a modo OLED oscuro"
+      >
+        <span class="theme-toggle__light-only items-center gap-1.5">
+          <Moon size={15} stroke-width={1.9} aria-hidden="true" />
+          <span class="hidden lg:inline">OLED</span>
+        </span>
+        <span class="theme-toggle__dark-only items-center gap-1.5">
+          <Sun size={15} stroke-width={1.9} aria-hidden="true" />
+          <span class="hidden lg:inline">Claro</span>
+        </span>
+      </button>
+
       <a
         href={cta.href}
         target={cta.external ? '_blank' : undefined}
         rel={cta.external ? 'noopener noreferrer' : undefined}
-        class="hidden items-center gap-1.5 rounded-full bg-fg px-4 py-2 text-xs font-medium text-surface no-underline transition-colors hover:bg-accent md:inline-flex"
+        title={cta.label}
+        class="hidden min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-fg px-4 py-2 text-xs font-medium text-surface no-underline transition-colors hover:bg-[var(--accent-solid)] hover:text-white md:inline-flex"
       >
         <span>{cta.label}</span>
         <ArrowUpRight size={14} stroke-width={2} aria-hidden="true" />
@@ -64,3 +84,43 @@ const { monogram, brandName, nav, cta, primaryNavLabel } = Astro.props;
     </nav>
   </div>
 </header>
+
+<script>
+  function syncThemeControls(isDark: boolean) {
+    const label = isDark ? 'Cambiar a modo claro' : 'Cambiar a modo OLED oscuro';
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
+    const meta = document.getElementById('theme-color-meta');
+    if (meta) {
+      meta.setAttribute('content', isDark ? '#000000' : '#F5F5F7');
+    }
+  }
+
+  function initThemeToggle() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    syncThemeControls(isDark);
+
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+      if (btn.dataset.themeBound === 'true') return;
+      btn.dataset.themeBound = 'true';
+
+      btn.addEventListener('click', () => {
+        const nextDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+        if (nextDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        try {
+          localStorage.setItem('jm_theme', nextDark ? 'dark' : 'light');
+        } catch {}
+        syncThemeControls(nextDark);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initThemeToggle);
+</script>
